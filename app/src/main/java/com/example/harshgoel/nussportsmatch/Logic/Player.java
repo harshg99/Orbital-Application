@@ -12,8 +12,6 @@ public class Player implements PlayerInterface{
     private Uri profilephoto;
     private String email;
     private String name;
-    public static boolean addedplayer=false;
-    public static int playerselect;
     private String password;
     private sportsPlayer tennis;
     private sportsPlayer squash;
@@ -51,12 +49,14 @@ public class Player implements PlayerInterface{
     public sportsPlayer getTt(){return tt;}
     public sportsPlayer getSquash(){return squash;}
     public sportsPlayer getBadminton(){return badminton;}
-    /*
-    public Rating getRating(){
-        return rating;
+    public void setTennis(sportsPlayer K){tennis=K;}
+    public void setTt(sportsPlayer K){tt=K;}
+    public void setSquash(sportsPlayer K){squash=K;}
+    public void setBadminton(sportsPlayer K){badminton=K;}
+
+    @Override
+    public String toString() {
+        return(" Name: "+getName()+" email: "+getEmail()+" password: "+getpassword()+" tennis: "+tennis.toString()+
+                " squash: "+squash.toString()+" badminton: "+badminton.toString()+" Tt: "+tt.toString());
     }
-    public void setRating(Rating k){
-        rating = k;
-    }
-*/
 }

@@ -24,7 +24,7 @@
         <activity android:name=".ProfileDataPackage.handlephoto">
         </activity>
         <activity android:name=".ProfileDataPackage.EditProfile"/>
-
+        <activity android:name=".ProfileDataPackage.setSports"/>
     </application>
 
 </manifest>

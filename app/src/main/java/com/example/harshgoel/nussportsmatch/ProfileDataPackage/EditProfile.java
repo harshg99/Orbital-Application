@@ -8,6 +8,7 @@ import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -39,6 +40,7 @@ public class EditProfile extends AppCompatActivity {
     public EditText passwordchange;
     public EditText namechange;
     private FirebaseAuth auth;
+    public Toolbar toolbar;
     private DatabaseReference data;
 
     @Override
@@ -49,6 +51,8 @@ public class EditProfile extends AppCompatActivity {
         passwordchange= (EditText) findViewById(R.id.textpassword);
         emailchange= (EditText) findViewById(R.id.textemail);
         confirm=(Button)findViewById(R.id.Confirmchanges);
+        toolbar=(Toolbar)findViewById(R.id.edit_bar);
+        setSupportActionBar(toolbar);
         auth=FirebaseAuth.getInstance();
         cpass=0;
         cname=0;

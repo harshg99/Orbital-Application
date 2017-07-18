@@ -9,6 +9,12 @@ public class Rating {
     private double ratingAwareness;
     private double ratingSkill;
     private double ratingNetSkill;
+    public Rating(){
+        ratingAwareness=0.0;
+        ratingFitness=0.0;
+        ratingSkill=0.0;
+        setRatingNetSkill();
+    }
     public Rating(double awareness,double skill,double fitness){
         setRatingAwareness(awareness);
         setRatingFitness(fitness);
@@ -31,4 +37,20 @@ public class Rating {
         return ratingNetSkill;
     }
 
+    public double getRatingSkill() {
+        return ratingSkill;
+    }
+
+    public double getRatingAwareness() {
+        return ratingAwareness;
+    }
+
+    public double getRatingFitness() {
+        return ratingFitness;
+    }
+
+    @Override
+    public String toString() {
+        return (" rs: "+getRatingSkill()+" ra: "+getRatingAwareness()+" rf: "+getRatingFitness()+" rns: "+getRatingNetSkill());
+    }
 }

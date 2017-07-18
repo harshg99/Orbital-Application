@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 
 import com.example.harshgoel.nussportsmatch.Logic.Player;
+import com.example.harshgoel.nussportsmatch.Logic.sportsPlayer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -131,7 +132,6 @@ public class SignUp extends AppCompatActivity {
                             newplayer.setEmail(email.getText().toString().trim());
                             newplayer.setpassword(pass.getText().toString().trim());
                             newplayer.setName("Default_Name");
-                            Player.addedplayer = true;
                             progressDialog.setMessage("Signing Up");
                             progressDialog.show();
                             auth.createUserWithEmailAndPassword(newplayer.getEmail(), newplayer.getpassword())
@@ -170,6 +170,26 @@ public class SignUp extends AppCompatActivity {
     }
     public void inituserdata(Player k,String Uid){
         data.child("users").child(Uid).setValue(k);
+        sportsPlayer Tennis=new sportsPlayer();
+        sportsPlayer squash =new sportsPlayer();
+        sportsPlayer TT=new sportsPlayer();
+        sportsPlayer badminton=new sportsPlayer();
+        data.child("users").child(auth.getCurrentUser().getUid()).child("tennis").child("SportsRate").setValue(Tennis.getRating());
+        data.child("users").child(auth.getCurrentUser().getUid()).child("tennis").child("isAdded").setValue(Tennis.getisAdded());
+        data.child("users").child(auth.getCurrentUser().getUid()).child("tennis")
+                .child("questionaireCompleted").setValue(Tennis.isQuestionaireCompleted());
+        data.child("users").child(auth.getCurrentUser().getUid()).child("squash").child("SportsRate").setValue(squash.getRating());
+        data.child("users").child(auth.getCurrentUser().getUid()).child("squash").child("isAdded").setValue(squash.getisAdded());
+        data.child("users").child(auth.getCurrentUser().getUid()).child("squash")
+                .child("questionaireCompleted").setValue(squash.isQuestionaireCompleted());
+        data.child("users").child(auth.getCurrentUser().getUid()).child("tt").child("SportsRate").setValue(TT.getRating());
+        data.child("users").child(auth.getCurrentUser().getUid()).child("tt").child("isAdded").setValue(TT.getisAdded());
+        data.child("users").child(auth.getCurrentUser().getUid()).child("tt")
+                .child("questionaireCompleted").setValue(TT.isQuestionaireCompleted());
+        data.child("users").child(auth.getCurrentUser().getUid()).child("badminton").child("SportsRate").setValue(badminton.getRating());
+        data.child("users").child(auth.getCurrentUser().getUid()).child("badminton").child("isAdded").setValue(badminton.getisAdded());
+        data.child("users").child(auth.getCurrentUser().getUid()).child("badminton")
+                .child("questionaireCompleted").setValue(badminton.isQuestionaireCompleted());
 
     }
     public boolean analyse_password(String pass1, String pass2) {
