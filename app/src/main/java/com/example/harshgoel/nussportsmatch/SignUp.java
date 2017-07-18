@@ -23,6 +23,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import static android.content.ContentValues.TAG;
 
@@ -38,6 +40,7 @@ public class SignUp extends AppCompatActivity {
     public Button confirmbut;
     public ImageView icon;
     private FirebaseAuth auth;
+    private DatabaseReference data;
     private FirebaseAuth.AuthStateListener mAuthListener;
     public ProgressDialog progressDialog;
 
@@ -46,6 +49,7 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
+        data= FirebaseDatabase.getInstance().getReference();
         if (user != null) {
             // User is signed in
             Toast.makeText(getApplicationContext(), "Already Signed In", Toast.LENGTH_LONG).show();
@@ -123,9 +127,10 @@ public class SignUp extends AppCompatActivity {
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Player newplayer = new Player();
+                            final Player newplayer = new Player();
                             newplayer.setEmail(email.getText().toString().trim());
                             newplayer.setpassword(pass.getText().toString().trim());
+                            newplayer.setName("Default_Name");
                             Player.addedplayer = true;
                             progressDialog.setMessage("Signing Up");
                             progressDialog.show();
@@ -136,6 +141,7 @@ public class SignUp extends AppCompatActivity {
                                             //checking if success
                                             if (task.isSuccessful()) {
                                                 //display some message her
+                                                inituserdata(newplayer,auth.getCurrentUser().getUid());
                                                 Toast.makeText(getApplicationContext(), "Successfully registered", Toast.LENGTH_LONG).show();
                                                 Intent intent=new Intent()
                                                         .setClass(com.example.harshgoel.nussportsmatch.SignUp.this,SignIn.class);
@@ -162,7 +168,10 @@ public class SignUp extends AppCompatActivity {
         }
 
     }
+    public void inituserdata(Player k,String Uid){
+        data.child("users").child(Uid).setValue(k);
 
+    }
     public boolean analyse_password(String pass1, String pass2) {
 
         if (pass1.equals(pass2)) {
